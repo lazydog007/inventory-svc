@@ -15,29 +15,29 @@ st.title('Inventario Socialista')
 # show_results_table = st.sidebar.checkbox("Results Table", value=True)
 # show_all_inventory_table = st.sidebar.checkbox("All Inventory")
 
-selected_column = st.selectbox("Select column to search in", ['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'], index=0)
-query_terms = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
-query_term_list = [term.strip() for term in query_terms.split(',')]
-show_results_table = st.checkbox("Results Table", value=True)
+
+# show_results_table = st.checkbox("Results Table", value=True)
+show_search = st.checkbox("Search", value=True)
 show_all_inventory_table = st.checkbox("All Inventory")
 
 # Replace or add after the existing code for displaying inventory items
-try:
-    if query_term_list and query_term_list != [''] and show_results_table:
-        st.subheader('Search Results')
-        search_results = []
-        search_results.extend(search_multi_in_column("inventory", selected_column, query_term_list))
-        print("\n")
-        print(f"search_results {search_results}")
-        print("\n")
-        if search_results:
-            df = pd.DataFrame(search_results, columns=['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'])
-            st.dataframe(df)
-        else:
-            st.write("No results found")
-except Exception as e:
-    print(f"Exception: {e}")
-    st.write("Nothing found")
+if show_search:
+    selected_column = st.selectbox("Select column to search in", ['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'], index=0)
+    query_terms = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
+    query_term_list = [term.strip() for term in query_terms.split(',')]
+    try:
+        if query_term_list and query_term_list != ['']:
+            st.subheader('Search Results')
+            search_results = []
+            search_results.extend(search_multi_in_column("inventory", selected_column, query_term_list))
+            if search_results:
+                df = pd.DataFrame(search_results, columns=['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'])
+                st.dataframe(df)
+            else:
+                st.write("No results found")
+    except Exception as e:
+        print(f"Exception: {e}")
+        st.write("Nothing found")
 
 
 if show_all_inventory_table:
