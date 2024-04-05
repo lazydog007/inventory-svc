@@ -1,6 +1,6 @@
 # Inventory Service
 
-This is a simple Streamlit app that allows you to interact with a database of inventory items.
+This is a simple Streamlit app that allows you to interact with a database of inventory items!
 
 ## Requirements
 
