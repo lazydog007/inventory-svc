@@ -1,4 +1,4 @@
-# Inventary Service
+# Inventory Service
 
 This is a simple Streamlit app that allows you to interact with a database of inventory items.
 
@@ -7,7 +7,6 @@ This is a simple Streamlit app that allows you to interact with a database of in
 - Python 3.10 or later
 - Streamlit 1.16 or later
 - Pipenv
-- A running instance of the [Socialista API](https://github.com/socialista/api)
 
 ## Usage
 

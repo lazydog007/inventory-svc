@@ -1,8 +1,6 @@
 import streamlit as st
 
-st.write("Hello World")
-st.write("## This is a H2 Title!")
-x = st.text_input("Movie", "Star Wars")
+st.title("Playground")
 
-if st.button("Click Me"):
-    st.write(f"Your favorite movie is `{x}`")
+st.write("Welcome to the pain of coding a streamlit app")
+
