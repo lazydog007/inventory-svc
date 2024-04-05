@@ -1,4 +1,3 @@
-from datetime import datetime
 import json
 import sqlite3
 import csv
@@ -47,7 +46,7 @@ def show_all_table_values(table_name):
     response = []
     for row in all_rows:
         response.append(row)
-        print(row)
+        # print(row)
 
     conn.close()
     return response
@@ -56,15 +55,46 @@ def search_in_column(table_name, column_name, query):
     conn = sqlite3.connect('data/database.db')
     cursor = conn.cursor()
 
-    sql_query = f"SELECT * FROM {table_name} WHERE {column_name} LIKE ?"
-    cursor.execute(sql_query, ('%' + query + '%',))
+    if column_name == 'id':
+        sql_query = f"SELECT * FROM {table_name} WHERE {column_name} = {query}"
+        cursor.execute(sql_query, query)
+    else:
+        sql_query = f"SELECT * FROM {table_name} WHERE {column_name} LIKE ?"
+        cursor.execute(sql_query, ('%' + query + '%',))
 
     matching_rows = cursor.fetchall()
 
     response = []
     for row in matching_rows:
         response.append(row)
-        print(row)
+        # print(row)
+
+    conn.close()
+    return response
+
+def search_multi_in_column(table_name, column_name, query_list):
+    conn = sqlite3.connect('data/database.db')
+    cursor = conn.cursor()
+    response = []
+    print('\n')
+    print(query_list)
+    print('\n')
+    for query in query_list:
+        print("query:" + query)
+        if column_name == 'id':
+            print("column_name:" + column_name)
+            sql_query = f"SELECT * FROM {table_name} WHERE {column_name} = {query}"
+            print("sql_query:" + sql_query)
+            cursor.execute(sql_query)
+        else:
+            sql_query = f"SELECT * FROM {table_name} WHERE {column_name} LIKE ?"
+            cursor.execute(sql_query, ('%' + query + '%',))
+
+        matching_rows = cursor.fetchall()
+
+        for row in matching_rows:
+            response.append(row)
+            # print(row)
 
     conn.close()
     return response
@@ -146,9 +176,9 @@ def update_order(order_id, updated_details):
     conn.close()
 
 
-create_inventory_table()
-populate_inventory_table()
-create_orders_table()
+# create_inventory_table()
+# populate_inventory_table()
+# create_orders_table()
 
 
 # PELIGROSOOOOO
