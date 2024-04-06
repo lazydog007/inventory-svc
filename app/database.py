@@ -46,7 +46,6 @@ def show_all_table_values(table_name):
     response = []
     for row in all_rows:
         response.append(row)
-        # print(row)
 
     conn.close()
     return response
@@ -67,7 +66,6 @@ def search_in_column(table_name, column_name, query):
     response = []
     for row in matching_rows:
         response.append(row)
-        # print(row)
 
     conn.close()
     return response
@@ -76,15 +74,9 @@ def search_multi_in_column(table_name, column_name, query_list):
     conn = sqlite3.connect('data/database.db')
     cursor = conn.cursor()
     response = []
-    print('\n')
-    print(query_list)
-    print('\n')
     for query in query_list:
-        print("query:" + query)
         if column_name == 'id':
-            print("column_name:" + column_name)
             sql_query = f"SELECT * FROM {table_name} WHERE {column_name} = {query}"
-            print("sql_query:" + sql_query)
             cursor.execute(sql_query)
         else:
             sql_query = f"SELECT * FROM {table_name} WHERE {column_name} LIKE ?"
@@ -94,7 +86,6 @@ def search_multi_in_column(table_name, column_name, query_list):
 
         for row in matching_rows:
             response.append(row)
-            # print(row)
 
     conn.close()
     return response
@@ -174,7 +165,42 @@ def update_order(order_id, updated_details):
     cursor.execute(sql_query, values)
     conn.commit()
     conn.close()
+    
+# This updates a speficic row in the order without retrieving everything
+def update_row_by_id(table_name, row_id, updated_details):
+    conn = sqlite3.connect('data/database.db')
+    cursor = conn.cursor()
 
+    # Build the SQL query dynamically based on the fields provided in updated_details
+    set_clause = ", ".join([f"{key} = ?" for key in updated_details.keys()])
+    sql_query = f"UPDATE {table_name} SET {set_clause} WHERE id = ?"
+
+    # Prepare the values for the placeholders in the SQL query
+    values = list(updated_details.values())
+    values.append(row_id)  # Add order_id to the end of values list for the WHERE clause
+
+    cursor.execute(sql_query, values)
+    conn.commit()
+    conn.close()
+
+
+# This updates multiple rows at the same time with the same values
+def update_rows_by_id(table_name, row_id_list, updated_details):
+    conn = sqlite3.connect('data/database.db')
+    cursor = conn.cursor()
+
+    # Build the SQL query dynamically based on the fields provided in updated_details
+    for row_id in row_id_list:
+        set_clause = ", ".join([f"{key} = ?" for key in updated_details.keys()])
+        sql_query = f"UPDATE {table_name} SET {set_clause} WHERE id = ?"
+
+        # Prepare the values for the placeholders in the SQL query
+        values = list(updated_details.values())
+        values.append(row_id)  # Add order_id to the end of values list for the WHERE clause
+
+        cursor.execute(sql_query, values)
+        conn.commit()
+    conn.close()
 
 # create_inventory_table()
 # populate_inventory_table()
