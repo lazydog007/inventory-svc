@@ -3,7 +3,7 @@ import pandas as pd
 # import requests
 import streamlit as st
 
-from database import search_in_column, search_multi_in_column, show_all_table_values, update_row_by_id # note: its not app.database because home.py is inside /app
+from database import search_in_column, search_multi_in_column, show_all_table_values, update_row_by_id, update_rows_by_id # note: its not app.database because home.py is inside /app
 TABLE_NAME = "inventory"
 st.set_page_config(
     page_title="Inventorio Socialista",
@@ -58,29 +58,33 @@ if show_all_inventory_table:
 if show_update_form:
     with st.form("update_form"):
         st.subheader("Update Inventory Row")
-        product_id = st.text_input("Enter product id")
+        # product_id = st.text_input("Enter product id")
+        product_ids = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
+        product_id_list = [term.strip() for term in query_terms.split(',')]
         updated_brand = st.text_input("Enter updated brand")
         updated_name = st.text_input("Enter updated name")
         updated_size = st.text_input("Enter updated size")
-        # updated_quantity = st.number_input("Enter updated quantity", min_value=0)
         updated_quantity = st.text_input("Enter updated quantity")
         updated_category = st.text_input("Enter updated category")
         updated_link = st.text_input("Enter updated link")
 
         if st.form_submit_button("Update"):
-            if product_id:
+            if product_id_list:
                 updated_values = {
                     'brand': updated_brand,
                     'name': updated_name,
                     'size': updated_size,
-                    'quantity': int(updated_quantity),
+                    'quantity': updated_quantity,
                     'category': updated_category,
                     'link': updated_link
                 }
 
                 filtered_values = {key: value for key, value in updated_values.items() if value != ''}
 
-                update_row_by_id(TABLE_NAME, product_id, filtered_values)
+                if filtered_values.get('quantity'):
+                    filtered_values['quantity'] = int(updated_values['quantity'])
+
+                update_rows_by_id(TABLE_NAME, product_ids, filtered_values)
                 st.write(f"update value {filtered_values}")
 
                 if show_search:
