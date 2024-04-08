@@ -3,7 +3,7 @@ import pandas as pd
 # import requests
 import streamlit as st
 
-from database import search_in_column, search_multi_in_column, show_all_table_values, update_row_by_id, update_rows_by_id # note: its not app.database because home.py is inside /app
+from database import search_multi_in_column, show_all_table_values, update_rows_by_id # note: its not app.database because home.py is inside /app
 TABLE_NAME = "inventory"
 st.set_page_config(
     page_title="Inventorio Socialista",
@@ -14,11 +14,19 @@ st.set_page_config(
 
 st.title('Inventario Socialista')
 
+col1, col2, col3, col4 = st.columns(4)
+with col1:  
+    show_search = st.checkbox("Search", value=True)
 
-# show_results_table = st.checkbox("Results Table", value=True)
-show_search = st.checkbox("Search", value=True)
-show_all_inventory_table = st.checkbox("All Inventory")
-show_update_form = st.checkbox("Update")
+with col2:
+    show_all_inventory_table = st.checkbox("All Inventory")
+
+with col3:
+    show_update_form = st.checkbox("Update")
+
+#  empty column for better formatting of the page
+with col4:
+    print("")
 
 # Replace or add after the existing code for displaying inventory items
 if show_search:
@@ -61,12 +69,18 @@ if show_update_form:
         # product_id = st.text_input("Enter product id")
         product_ids = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
         product_id_list = [term.strip() for term in query_terms.split(',')]
-        updated_brand = st.text_input("Enter updated brand")
-        updated_name = st.text_input("Enter updated name")
-        updated_size = st.text_input("Enter updated size")
-        updated_quantity = st.text_input("Enter updated quantity")
-        updated_category = st.text_input("Enter updated category")
-        updated_link = st.text_input("Enter updated link")
+        
+        col1, col2 = st.columns(2)
+
+        with col1:
+            updated_brand = st.text_input("Enter updated brand")
+            updated_name = st.text_input("Enter updated name")
+            updated_size = st.text_input("Enter updated size")
+
+        with col2:
+            updated_quantity = st.text_input("Enter updated quantity")
+            updated_category = st.text_input("Enter updated category")
+            updated_link = st.text_input("Enter updated link")
 
         if st.form_submit_button("Update"):
             if product_id_list:
