@@ -2,6 +2,7 @@ import json
 import sqlite3
 import csv
 
+#  Table creation and population
 def create_inventory_table():
   conn = sqlite3.connect('data/database.db')
   cursor = conn.cursor()
@@ -36,6 +37,46 @@ def populate_inventory_table():
     print("successfully populated inventory table")
     conn.close()
 
+# Orders Table
+def create_orders_table():
+    conn = sqlite3.connect('data/database.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            contents TEXT NOT NULL,
+            pricing JSONB NOT NULL,
+            client TEXT NOT NULL,
+            phone_number TEXT,
+            email TEXT,
+            order_date DATETIME,
+            shipping_address TEXT,
+            status TEXT,
+            payment_method TEXT
+        )
+    ''')
+
+    conn.commit()
+    print("successfully created orders table")
+    conn.close()
+
+def populate_orders_table():
+    conn = sqlite3.connect('data/database.db')
+    cursor = conn.cursor()
+
+    with open('data/mock_orders_data.csv', 'r') as file:
+        csv_reader = csv.reader(file)
+        next(csv_reader)  # Skip the header row
+        for row in csv_reader:
+
+            cursor.execute("INSERT INTO orders (contents, pricing, client, phone_number, email, order_date, shipping_address, status, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+
+    conn.commit()
+    print("successfully populated orders table")
+    conn.close()
+
+# ========================== FUNCTIONS ============================
 def show_all_table_values(table_name):
     conn = sqlite3.connect('data/database.db')
     cursor = conn.cursor()
@@ -49,6 +90,7 @@ def show_all_table_values(table_name):
 
     conn.close()
     return response
+
 
 def search_in_column(table_name, column_name, query):
     conn = sqlite3.connect('data/database.db')
@@ -90,30 +132,6 @@ def search_multi_in_column(table_name, column_name, query_list):
     conn.close()
     return response
 
-# Orders Table
-def create_orders_table():
-    conn = sqlite3.connect('data/database.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS orders (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            contents TEXT NOT NULL,
-            subtotal REAL,
-            tax REAL,
-            total REAL,
-            currency REAL,
-            client TEXT NOT NULL,
-            order_date DATETIME,
-            shipping_address TEXT,
-            status TEXT,
-            payment_method TEXT
-        )
-    ''')
-
-    conn.commit()
-    print("successfully created orders table")
-    conn.close()
 
 def get_specific_orders(order_ids):
     conn = sqlite3.connect('data/database.db')
@@ -141,8 +159,8 @@ def insert_order(order_details):
 
     contents_json = json.dumps(order_details['contents'])  # Convert list to JSON string
 
-    cursor.execute("INSERT INTO orders (contents, subtotal, tax, total, currency, client, order_date, shipping_address, status, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                   (contents_json, order_details['subtotal'], order_details['tax'], order_details['total'], order_details['currency'], order_details['client'], order_details['order_date'], order_details['shipping_address'], order_details['status'], order_details['payment_method']))
+    cursor.execute("INSERT INTO orders (contents, pricing, client, phone_number, email, order_date, shipping_address, status, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                   (contents_json, order_details['pricing'], order_details['client'], order_details['order_date'], order_details['shipping_address'], order_details['status'], order_details['payment_method']))
 
     conn.commit()
     new_order_id = cursor.lastrowid # Returns the ID of the last inserted row
@@ -202,9 +220,6 @@ def update_rows_by_id(table_name, row_id_list, updated_details):
         conn.commit()
     conn.close()
 
-# create_inventory_table()
-# populate_inventory_table()
-# create_orders_table()
 
 
 # PELIGROSOOOOO
@@ -216,6 +231,7 @@ def drop_table(table_name):
     cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
 
     conn.commit()
+    print(f"Table {table_name} is dead")
     conn.close()
 
 def drop_all_tables():
@@ -230,7 +246,16 @@ def drop_all_tables():
             cursor.execute(f"DROP TABLE IF EXISTS {table[0]}")
 
     conn.commit()
+    print(f"All Tables are dead")
     conn.close()
 
-# drop_all_tables()
+def cleanup():
+    drop_all_tables()
+    create_inventory_table()
+    create_orders_table()
+    populate_inventory_table()
+    populate_orders_table()
+    print("Done cleaning")
 
+cleanup()
+# populate_orders_table()

@@ -6,9 +6,9 @@ import streamlit as st
 from database import search_multi_in_column, show_all_table_values, update_rows_by_id # note: its not app.database because home.py is inside /app
 TABLE_NAME = "inventory"
 st.set_page_config(
-    page_title="Inventorio Socialista",
+    page_title="Inventario Socialista",
     page_icon=":bar-chart",
-    initial_sidebar_state='collapsed',
+    # initial_sidebar_state='collapsed',
     layout="wide"
 )
 
@@ -28,15 +28,18 @@ with col3:
 with col4:
     print("")
 
-# Replace or add after the existing code for displaying inventory items
+col11, col22, = st.columns(2)
+
 if show_search:
-    with st.form("search_form"):
-        selected_column = st.selectbox("Select column to search in", ['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'], index=0)
-        query_terms = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
-        query_term_list = [term.strip() for term in query_terms.split(',')]
-        
-        if st.form_submit_button("Search"):
-            st.experimental_rerun()
+    with col11:
+        with st.form("search_form"):
+            st.subheader("Search")
+            selected_column = st.selectbox("Select column to search in", ['id', 'brand', 'name', 'size', 'quantity', 'category', 'link'], index=1)
+            query_terms = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
+            query_term_list = [term.strip() for term in query_terms.split(',')]
+            
+            if st.form_submit_button("Search"):
+                st.experimental_rerun()
     try:
         if query_term_list and query_term_list != ['']:
             st.subheader('Search Results')
@@ -51,7 +54,48 @@ if show_search:
         print(f"Exception: {e}")
         st.write("Nothing found")
 
+with col22:
+    if show_update_form:
+        with st.form("update_form"):
+            st.subheader("Update Inventory Row")
+            product_ids = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
+            product_id_list = [term.strip() for term in product_ids.split(',')]
+            
+            col1, col2 = st.columns(2)
 
+            with col1:
+                updated_brand = st.text_input("Enter updated brand")
+                updated_name = st.text_input("Enter updated name")
+                updated_size = st.text_input("Enter updated size")
+
+            with col2:
+                updated_quantity = st.text_input("Enter updated quantity")
+                updated_category = st.text_input("Enter updated category")
+                updated_link = st.text_input("Enter updated link")
+
+            if st.form_submit_button("Update"):
+                if product_id_list:
+                    updated_values = {
+                        'brand': updated_brand,
+                        'name': updated_name,
+                        'size': updated_size,
+                        'quantity': updated_quantity,
+                        'category': updated_category,
+                        'link': updated_link
+                    }
+
+                    filtered_values = {key: value for key, value in updated_values.items() if value != ''}
+
+                    if filtered_values.get('quantity'):
+                        filtered_values['quantity'] = int(updated_values['quantity'])
+
+                    update_rows_by_id(TABLE_NAME, product_ids, filtered_values)
+                    st.write(f"update value {filtered_values}")
+
+                    if show_search:
+                        st.rerun()
+                else:
+                    st.warning(f"No ID provided")
 if show_all_inventory_table:
     st.subheader('Inventory')
     inventory_items = show_all_table_values("inventory")
@@ -62,46 +106,3 @@ if show_all_inventory_table:
         st.dataframe(df)
     else:
         st.write('Nothing in it :(')
-
-if show_update_form:
-    with st.form("update_form"):
-        st.subheader("Update Inventory Row")
-        # product_id = st.text_input("Enter product id")
-        product_ids = st.text_input("Enter search terms separated by commas. ex. 1, 2, 3, 4")
-        product_id_list = [term.strip() for term in query_terms.split(',')]
-        
-        col1, col2 = st.columns(2)
-
-        with col1:
-            updated_brand = st.text_input("Enter updated brand")
-            updated_name = st.text_input("Enter updated name")
-            updated_size = st.text_input("Enter updated size")
-
-        with col2:
-            updated_quantity = st.text_input("Enter updated quantity")
-            updated_category = st.text_input("Enter updated category")
-            updated_link = st.text_input("Enter updated link")
-
-        if st.form_submit_button("Update"):
-            if product_id_list:
-                updated_values = {
-                    'brand': updated_brand,
-                    'name': updated_name,
-                    'size': updated_size,
-                    'quantity': updated_quantity,
-                    'category': updated_category,
-                    'link': updated_link
-                }
-
-                filtered_values = {key: value for key, value in updated_values.items() if value != ''}
-
-                if filtered_values.get('quantity'):
-                    filtered_values['quantity'] = int(updated_values['quantity'])
-
-                update_rows_by_id(TABLE_NAME, product_ids, filtered_values)
-                st.write(f"update value {filtered_values}")
-
-                if show_search:
-                    st.experimental_rerun()
-            else:
-                st.warning(f"No ID provided")

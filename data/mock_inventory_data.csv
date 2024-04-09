@@ -1,4 +1,32 @@
 brand,name,size,quantity,category,link
+Patagonia,Better Sweater 1/4-Zip,M,55,Sweater,https://www.patagonia.com/t/better-sweater-zip
+Lululemon,Align Pant II 25",S,75,Pants,https://www.lululemon.com/t/align-pant-ii
+New Balance,Fresh Foam 1080v10,M,65,Running Shoes,https://www.newbalance.com/t/fresh-foam-1080v10
+Vans,Old Skool Skate Shoes,8,50,Shoes,https://www.vans.com/t/old-skool-skate-shoes
+Columbia,Titanium Outdry Ex Gold Down Jacket,L,25,Jacket,https://www.columbia.com/t/outdry-ex-gold-down-jacket
+The North Face,Ultra 109 GTX Running Shoe,9,90,Running Shoes,https://www.thenorthface.com/t/ultra-109-gtx
+Patagonia,Refugio Backpack 28L,One Size,65,Backpack,https://www.patagonia.com/t/refugio-backpack
+Lululemon,Metal Vent Tech Short Sleeve 2.0,M,80,Shirt,https://www.lululemon.com/t/metal-vent-tech-shirt
+New Balance,Accelerate Short,S,70,Shorts,https://www.newbalance.com/t/accelerate-short
+Vans,Classic Pullover Hoodie,L,60,Hoodie,https://www.vans.com/t/classic-pullover-hoodie
+Columbia,Bajada III Winter Running Shoe,10,40,Running Shoes,https://www.columbia.com/t/bajada-iii-winter-shoe
+The North Face,Tri-Blend Hoodie,M,55,Hoodie,https://www.thenorthface.com/t/tri-blend-hoodie
+Patagonia,Micro Puff Jacket,XL,35,Jacket,https://www.patagonia.com/t/micro-puff-jacket
+Lululemon,Surge Jogger 29",M,45,Joggers,https://www.lululemon.com/t/surge-jogger
+New Balance,Impact Run Tight,L,50,Tights,https://www.newbalance.com/t/impact-run-tight
+Vans,Checkerboard Slip-On,9.5,75,Shoes,https://www.vans.com/t/checkerboard-slip-on
+Columbia,Powder Lite Vest,L,30,Vest,https://www.columbia.com/t/powder-lite-vest
+The North Face,Reactor Short,S,65,Shorts,https://www.thenorthface.com/t/reactor-short
+Patagonia,Nano Puff Vest,M,70,Vest,https://www.patagonia.com/t/nano-puff-vest
+Lululemon,City Sweat Jogger 29",XL,40,Joggers,https://www.lululemon.com/t/city-sweat-jogger
+New Balance,Minimus 10v1 Trail,11,85,Trail Shoes,https://www.newbalance.com/t/minimus-10v1-trail
+Vans,Core Basics Beanie,One Size,90,Beanie,https://www.vans.com/t/core-basics-beanie
+Columbia,Whirlibird IV Interchange Jacket,M,55,Jacket,https://www.columbia.com/t/whirlibird-interchange-jacket
+The North Face,Apex Bionic 2 Jacket,L,65,Jacket,https://www.thenorthface.com/t/apex-bionic-jacket
+Patagonia,Torrentshell 3L Jacket,XL,75,Jacket,https://www.patagonia.com/t/torrentshell-jacket
+Lululemon,Evolution Polo,M,50,Polo,https://www.lululemon.com/t/evolution-polo
+New Balance,Visaro 2.0 Control FG,10,60,Football Boots,https://www.newbalance.com/t/visaro-control-fg
+Vans,SK8-Hi MTE Shoes,11,70,Shoes,https://www.vans.com/t/sk8-hi-mte-shoes
 Nike,Dri-FIT Legend T-Shirt,S,100,T-Shirt,https://www.nike.com/t/dri-fit-legend-t-shirt
 Nike,Sportswear Club Fleece Hoodie,M,50,Hoodie,https://www.nike.com/t/sportswear-club-fleece-hoodie
 Nike,Pro Tights,L,75,Tights,https://www.nike.com/t/pro-tights
@@ -41,31 +69,3 @@ Puma,Soft Sports Drapey Shorts,S,75,Shorts,https://www.puma.com/t/soft-sports-dr
 Reebok,Speedwick Stacked Logo Tee,M,60,Tee,https://www.reebok.com/t/speedwick-stacked-logo-tee
 Columbia,Silver Ridge Cargo Shorts,L,45,Shorts,https://www.columbia.com/t/silver-ridge-cargo-shorts
 The North Face,Resolve 2 Jacket,XL,30,Jacket,https://www.thenorthface.com/t/resolve-2-jacket
-Patagonia,Better Sweater 1/4-Zip,M,55,Sweater,https://www.patagonia.com/t/better-sweater-zip
-Lululemon,Align Pant II 25",S,75,Pants,https://www.lululemon.com/t/align-pant-ii
-New Balance,Fresh Foam 1080v10,M,65,Running Shoes,https://www.newbalance.com/t/fresh-foam-1080v10
-Vans,Old Skool Skate Shoes,8,50,Shoes,https://www.vans.com/t/old-skool-skate-shoes
-Columbia,Titanium Outdry Ex Gold Down Jacket,L,25,Jacket,https://www.columbia.com/t/outdry-ex-gold-down-jacket
-The North Face,Ultra 109 GTX Running Shoe,9,90,Running Shoes,https://www.thenorthface.com/t/ultra-109-gtx
-Patagonia,Refugio Backpack 28L,One Size,65,Backpack,https://www.patagonia.com/t/refugio-backpack
-Lululemon,Metal Vent Tech Short Sleeve 2.0,M,80,Shirt,https://www.lululemon.com/t/metal-vent-tech-shirt
-New Balance,Accelerate Short,S,70,Shorts,https://www.newbalance.com/t/accelerate-short
-Vans,Classic Pullover Hoodie,L,60,Hoodie,https://www.vans.com/t/classic-pullover-hoodie
-Columbia,Bajada III Winter Running Shoe,10,40,Running Shoes,https://www.columbia.com/t/bajada-iii-winter-shoe
-The North Face,Tri-Blend Hoodie,M,55,Hoodie,https://www.thenorthface.com/t/tri-blend-hoodie
-Patagonia,Micro Puff Jacket,XL,35,Jacket,https://www.patagonia.com/t/micro-puff-jacket
-Lululemon,Surge Jogger 29",M,45,Joggers,https://www.lululemon.com/t/surge-jogger
-New Balance,Impact Run Tight,L,50,Tights,https://www.newbalance.com/t/impact-run-tight
-Vans,Checkerboard Slip-On,9.5,75,Shoes,https://www.vans.com/t/checkerboard-slip-on
-Columbia,Powder Lite Vest,L,30,Vest,https://www.columbia.com/t/powder-lite-vest
-The North Face,Reactor Short,S,65,Shorts,https://www.thenorthface.com/t/reactor-short
-Patagonia,Nano Puff Vest,M,70,Vest,https://www.patagonia.com/t/nano-puff-vest
-Lululemon,City Sweat Jogger 29",XL,40,Joggers,https://www.lululemon.com/t/city-sweat-jogger
-New Balance,Minimus 10v1 Trail,11,85,Trail Shoes,https://www.newbalance.com/t/minimus-10v1-trail
-Vans,Core Basics Beanie,One Size,90,Beanie,https://www.vans.com/t/core-basics-beanie
-Columbia,Whirlibird IV Interchange Jacket,M,55,Jacket,https://www.columbia.com/t/whirlibird-interchange-jacket
-The North Face,Apex Bionic 2 Jacket,L,65,Jacket,https://www.thenorthface.com/t/apex-bionic-jacket
-Patagonia,Torrentshell 3L Jacket,XL,75,Jacket,https://www.patagonia.com/t/torrentshell-jacket
-Lululemon,Evolution Polo,M,50,Polo,https://www.lululemon.com/t/evolution-polo
-New Balance,Visaro 2.0 Control FG,10,60,Football Boots,https://www.newbalance.com/t/visaro-control-fg
-Vans,SK8-Hi MTE Shoes,11,70,Shoes,https://www.vans.com/t/sk8-hi-mte-shoes
